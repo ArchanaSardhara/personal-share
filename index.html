@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine?</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 500px;
+      width: 100%;
+    }
+
+    button {
+      font-size: 1.2rem;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+      width: 200px;
+    }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+      left: calc(50% - 210px);
+      top: 20px;
+    }
+
+    #no {
+      background-color: white;
+      color: #ff4d6d;
+      left: calc(50% + 10px);
+      top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClick()">Yes ❤️</button>
+      <button id="no" onmouseover="moveNo()">No 💔</button>
+    </div>
+  </div>
+
+  <script>
+    function yesClick() {
+      document.body.innerHTML = "<h1>Yayyyyyy!!! 🥰</h1><p style='color:white;font-size:1.5rem;'>You just made the smartest choice 😘</p><p style='color:white;font-size:2rem;'>Now wait to claim your reward 💋💋💋</p>";
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const container = document.querySelector('.container');
+      const containerRect = container.getBoundingClientRect();
+
+      // Calculate safe area within container for the button
+      // Restrict to ensure button doesn't overflow the container even with positioning rounding
+      const maxX = containerRect.width - btnWidth;
+      const maxY = containerRect.height - btnHeight;
+
+      // Get container's bounding relative to current button parent
+      // Convert container's position to relative coordinates in its context
+      let x = Math.random() * 400;
+      let y = Math.random() * 500;
+
+      // Ensure values never negative and never cause overflow
+      x = Math.max(0, Math.min(x, maxX));
+      y = Math.max(0, Math.min(y, maxY));
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+  </script>
+
+</body>
+</html>
