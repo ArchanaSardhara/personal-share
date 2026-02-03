@@ -26,7 +26,7 @@
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 30px;
       color: #fff;
       margin-bottom: 30px;
     }
@@ -38,13 +38,14 @@
     }
 
     button {
-      font-size: 1.2rem;
+      font-size: 20px;
       padding: 10px 25px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       position: absolute;
       width: 200px;
+      text-align: center;
     }
 
     #yes {
@@ -74,33 +75,41 @@
 
   <script>
     function yesClick() {
-      document.body.innerHTML = "<h1>Yayyyyyy!!! 🥰</h1><p style='color:white;font-size:1.5rem;'>You just made the smartest choice 😘</p><p style='color:white;font-size:2rem;'>Now wait to claim your reward 💋💋💋</p>";
+      document.body.innerHTML = "<h1>Yayyyyyy!!! 🥰</h1><p style='color:white;font-size:20px;'>You just made the smartest choice 😘</p><p style='color:white;font-size:24px;'>Now wait to claim your reward 💋💋💋</p>";
     }
+
+    // store current yes button size
+    let yesFontSize = 20; // px
+    let yesButtonWidth = 200;
 
     function moveNo() {
       const noBtn = document.getElementById("no");
+      const yesBtn = document.getElementById("yes");
       const btnWidth = noBtn.offsetWidth;
       const btnHeight = noBtn.offsetHeight;
       const container = document.querySelector('.container');
       const containerRect = container.getBoundingClientRect();
 
       // Calculate safe area within container for the button
-      // Restrict to ensure button doesn't overflow the container even with positioning rounding
       const maxX = containerRect.width - btnWidth;
       const maxY = containerRect.height - btnHeight;
 
-      // Get container's bounding relative to current button parent
-      // Convert container's position to relative coordinates in its context
       let x = Math.random() * 400;
       let y = Math.random() * 500;
 
-      // Ensure values never negative and never cause overflow
       x = Math.max(0, Math.min(x, maxX));
       y = Math.max(0, Math.min(y, maxY));
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
-    }
 
+      // Increase yes button font size on every "no" hover/click
+      yesFontSize = Math.min(30, yesFontSize + 1);
+      yesButtonWidth = Math.min(400, yesButtonWidth + 2);
+      yesBtn.style.left = `calc(50% - ${yesButtonWidth / 2}px)`;
+      yesBtn.style.top = '100px';
+      yesBtn.style.fontSize = yesFontSize + "px";
+      yesBtn.style.width = yesButtonWidth + "px";
+    }
   </script>
 
 </body>
